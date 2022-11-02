@@ -64,7 +64,6 @@ It's impossible to add with UI, you must add the repo with the command line tool
 Create application
 ------------------
 ie.
-
     project: default
     source:
         repoURL: iad.ocir.io

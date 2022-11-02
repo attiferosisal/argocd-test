@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: helmstreet-values
+  namespace: argocd-2-4
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/attiferosisal/argocd-test.git
+    path: helmstreet/preprod/values.yaml
+    targetRevision: main
+    helm:
+      valueFiles:
+        - git-helm-values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: helmstreet
