@@ -1,0 +1,28 @@
+repoServer:
+  extraVolumeMounts:
+    - name: ocicli
+      mountPath: /app/config/ocicli
+  extraVolumes:
+    - name: ocicli
+      emptyDir: {}
+  initContainers:
+    - name: init-ocicli
+      image: curlimages/curl
+      command: ['sh', '-c']
+      args:
+        - "curl https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh -o /custom-tools/install.sh"
+      env:
+        - name: GIT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: test-secret
+        - name: GIT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: test-secret
+      volumeMounts:
+        - name: ocicli
+          mountPath: /custom-tools
+          

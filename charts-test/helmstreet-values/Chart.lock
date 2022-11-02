@@ -1,0 +1,6 @@
+dependencies:
+- name: helmstreet
+  repository: oci://iad.ocir.io/sisalspa/helmtest
+  version: 0.1.1
+digest: sha256:38d3a72ab10843b58a155525e50b68858a6a7287876e5ebb02d537247b32286f
+generated: "2022-11-02T16:05:01.238335+01:00"

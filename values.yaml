@@ -1,0 +1,41 @@
+image:
+  tag: 2.4.11
+
+#controller: 
+#  metrics:
+#    enabled: true
+
+redis:
+  #enabled: ture
+  architecture: replication
+
+redisWait:
+  enabled: ture
+
+server:
+  replicaCount: 2
+  #livenessProbe:
+  #  enabled: true
+  #readinessProbe:
+  #  enabled: true
+  #metrics:
+  #  enabled: true
+
+repoServer:
+  replicaCount: 2
+  #livenessProbe:
+  #  enabled: true
+  #readinessProbe:
+  #  enabled: true
+  #metrics:
+  #  enabled: true
+
+dex:
+  enabled: true
+  #metrics:
+  #  enabled: true
+  serviceAccount:
+    name: argocd-dex-server
+
+
+  

@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: firstcrd-ngix
+  name: firstextermal
   namespace: argocd
 spec:
-  project: firstcrd-ngix
+  project: default
   syncPolicy:
     automated:
       prune: true
@@ -14,5 +14,5 @@ spec:
     targetRevision: HEAD
     path: .
   destination:
-    server: https://kubernetes.default.svc
+    server: https://129.153.169.34:6443
     namespace: default
