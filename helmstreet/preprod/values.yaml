@@ -3,4 +3,4 @@
 # Declare variables to be passed into your templates.
 
 helmstreet:
-  replicaCount: 3
+  replicaCount: 1
