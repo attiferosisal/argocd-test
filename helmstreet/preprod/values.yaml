@@ -2,10 +2,9 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-helmstreet:
-  replicaCount: 1
+#helmstreet:  
 
-helmstreet2:
-  replicaCount: 2
+#helmstreet2:
 
 global:
+  replicaCount: 1
