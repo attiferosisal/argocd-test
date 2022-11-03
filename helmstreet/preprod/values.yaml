@@ -4,3 +4,8 @@
 
 helmstreet:
   replicaCount: 1
+
+helmstreet2:
+  replicaCount: 2
+
+global:

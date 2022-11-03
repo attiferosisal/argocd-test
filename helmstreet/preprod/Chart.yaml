@@ -21,3 +21,8 @@ dependencies:
   - name: helmstreet
     version: "0.1.2"
     repository: "oci://iad.ocir.io/sisalspa/helmtest"
+  - name: helmstreet
+    alias: helmstreet2
+    version: "0.1.2"
+    repository: "oci://iad.ocir.io/sisalspa/helmtest"
+  
