@@ -43,6 +43,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{/*
+Common namespace
+*/}}
+{{- define "helmstreet.namespace" -}}
+{{- if .Values.namespacesOverride }}
+namespace: {{ .Values.namespacesOverride }}
+{{- else }}
+namespace: {{ .Release.Namespace }}
+{{- end }}
+{{- end }}
+
+{{/*
 Selector labels
 */}}
 {{- define "helmstreet.selectorLabels" -}}

@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: helmstreet-application
-  namespace: default
+  namespace: argocd-2-4
 spec:
   destination:
     namespace: default

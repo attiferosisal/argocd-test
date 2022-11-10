@@ -16,7 +16,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
-  namespace: {{ .Valuses.namespacesOverride | include "helmstreet.serviceAccountName" . }}
+  {{ include "helmstreet.namespace" . | nindent 2}}
   labels:
     {{- include "helmstreet.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
