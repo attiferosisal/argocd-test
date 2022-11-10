@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "helmstreet.fullname" . }}
+  namespace: {{ .Valuses.namespacesOverride | <some default name> }}
   labels:
     {{- include "helmstreet.labels" . | nindent 4 }}
 spec:

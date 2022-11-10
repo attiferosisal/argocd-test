@@ -22,11 +22,11 @@ Steps
 
 - helm-3.10.1-linux-amd64 repo add bitnami https://charts.bitnami.com/bitnami
 
-### Configure new ArgoCD
+### Install new ArgoCD
 
-- kubectl create namespace argocd-2-4-14
-- Change namespace to argocd-2-4-14
-- helm-3.10.1-linux-amd64 install release-2-4 bitnami/argo-cd 
+- kubectl create namespace argocd-2-4
+- Change namespace to argocd-2-4
+- helm-3.10.1-linux-amd64 install release-2-4 bitnami/argo-cd -f valuesfile.yaml
 
 #### System Out
 
@@ -56,8 +56,20 @@ Steps
     echo "Password: $(kubectl -n argocd-2-4 get secret argocd-secret -o jsonpath="{.data.clearPassword}" | base64 -d)"
     [root@csrvkmarc01 argocd-2.0.1-backup]# 
 
+### Pathc backup with new namespace
+
+    TBD
+
 ### Connect to destination ArgoCD
 
 - kubectl port-forward --namespace argocd svc/argocd-server 8080:443
 - argocd-2.2.15-linux-amd64 login localhost:8080 --insecure --plaintext
 - argocd-2.2.15-linux-amd64 admin import - < backup.yaml
+
+### Insert url in argocd-cm if not inserted throw helm
+
+Under data section insert:
+
+    url: https://argocd-automation-platform-preprod.sisal.it
+
+### Create rbac argo file if not created

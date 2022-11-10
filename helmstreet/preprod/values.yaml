@@ -4,3 +4,7 @@
 
 helmstreet:  
   replicaCount: 1
+
+helmstreet2:
+  replicaCount: 2
+  namespacesOverride: helmstreet-incubo

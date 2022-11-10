@@ -1,0 +1,83 @@
+apiVersion: v1
+data:
+  policy.csv: "#DEFAULT ROLE\np, role:unauthorizedUsers, *, *, */*, deny \n\n#OTHER
+    ROLES\np, role:operator, applications, get, */*, allow\np, role:operator, applications,
+    sync, */*, allow\n#p, role:operator, applications, action/apps/Deployment/restart,
+    */*, allow\n#p, role:operator, applications, action/apps/Deployment/delete, */*,
+    allow\n#p, role:operator, applications, action/apps/StatefulSet/restart, */*,
+    allow\n#p, role:operator, applications, action/apps/StatefulSet/delete, */*, allow\np,
+    role:operator, applications, action/apps/Deployment/restart, online-betting-spagna-app-project-preprod/online-betting-spagna-app-preprod,
+    allow\np, role:operator, applications, action/apps/Deployment/restart, online-betting-spagna-app-project-farm-a/online-betting-spagna-app-farm-a,
+    allow\np, role:operator, applications, action/apps/Deployment/restart, online-betting-spagna-app-project-farm-b/online-betting-spagna-app-farm-b,
+    allow\np, role:operator, applications, action/apps/Deployment/restart, area-riservata-spagna-app-project-preprod/area-riservata-spagna-app-preprod,
+    allow\np, role:operator, applications, action/apps/Deployment/restart, area-riservata-spagna-app-project-farm-a/area-riservata-spagna-app-farm-a,
+    allow\np, role:operator, applications, action/apps/Deployment/restart, area-riservata-spagna-app-project-farm-b/area-riservata-spagna-app-farm-b,
+    allow\np, role:operator, applications, action/apps/StatefulSet/restart, online-betting-spagna-app-project-preprod/online-betting-spagna-app-preprod,
+    allow\np, role:operator, applications, action/apps/StatefulSet/restart, online-betting-spagna-app-project-farm-a/online-betting-spagna-app-farm-a,
+    allow\np, role:operator, applications, action/apps/StatefulSet/restart, online-betting-spagna-app-project-farm-b/online-betting-spagna-app-farm-b,
+    allow\np, role:operator, applications, action/apps/StatefulSet/restart, area-riservata-spagna-app-project-preprod/area-riservata-spagna-app-preprod,
+    allow\np, role:operator, applications, action/apps/StatefulSet/restart, area-riservata-spagna-app-project-farm-a/area-riservata-spagna-app-farm-a,
+    allow\np, role:operator, applications, action/apps/StatefulSet/restart, area-riservata-spagna-app-project-farm-b/area-riservata-spagna-app-farm-b,
+    allow\np, role:operator, applications, delete, online-betting-spagna-app-project-preprod/online-betting-spagna-app-preprod,
+    allow\np, role:operator, applications, delete, online-betting-spagna-app-project-farm-a/online-betting-spagna-app-farm-a,
+    allow\np, role:operator, applications, delete, online-betting-spagna-app-project-farm-b/online-betting-spagna-app-farm-b,
+    allow\np, role:operator, applications, delete, area-riservata-spagna-app-project-preprod/area-riservata-spagna-app-preprod,
+    allow\np, role:operator, applications, delete, area-riservata-spagna-app-project-farm-a/area-riservata-spagna-app-farm-a,
+    allow\np, role:operator, applications, delete, area-riservata-spagna-app-project-farm-b/area-riservata-spagna-app-farm-b,
+    allow\n\n## ASSOCIATION BETWEEN ACTIVE DIRECTORY GROUPS AND ARGOCD DEFAULT ROLES
+    --> refer to https://github.com/argoproj/argo-cd/blob/master/assets/builtin-policy.csv\n#
+    Grant full admin access to adminK8S Active Directory group\ng, adminK8S, role:admin\n#
+    Grant operator role to operatorK8S Active Directory group\ng, operatorK8S, role:operator\n#
+    Grant read-only access of ArgoCD Applications to devK8S Active Directory group
+    \ng, devK8S, role:readonly\n"
+  policy.default: role:unauthorizedUsers
+  scopes: '[groups, email]'
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"policy.csv":"g, adminK8S, role:admin\n","policy.default":"role:unauthorizedUsers","scopes":"[groups, email]"},"kind":"ConfigMap","metadata":{"annotations":{},"creationTimestamp":"2022-10-25T10:11:01Z","labels":{"app.kubernetes.io/name":"argocd-rbac-cm","app.kubernetes.io/part-of":"argocd"},"managedFields":[{"apiVersion":"v1","fieldsType":"FieldsV1","fieldsV1":{"f:data":{".":{},"f:policy.default":{}},"f:metadata":{"f:annotations":{".":{},"f:kubectl.kubernetes.io/last-applied-configuration":{}},"f:labels":{".":{},"f:app.kubernetes.io/name":{},"f:app.kubernetes.io/part-of":{}}}},"manager":"argocd-2.2.15-linux-amd64","operation":"Update","time":"2022-10-25T10:11:01Z"},{"apiVersion":"v1","fieldsType":"FieldsV1","fieldsV1":{"f:data":{"f:policy.csv":{},"f:scopes":{}}},"manager":"kubectl-edit","operation":"Update","time":"2022-11-09T10:48:40Z"}],"name":"argocd-rbac-cm","namespace":"argocd-2-4","resourceVersion":"300949160","selfLink":"/api/v1/namespaces/argocd-2-4/configmaps/argocd-rbac-cm","uid":"1971b6bd-56ab-45d9-a4cb-5af7d46a8a2b"}}
+  creationTimestamp: "2022-10-25T10:11:01Z"
+  labels:
+    app.kubernetes.io/name: argocd-rbac-cm
+    app.kubernetes.io/part-of: argocd
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:data:
+        .: {}
+        f:policy.default: {}
+      f:metadata:
+        f:annotations: {}
+        f:labels:
+          .: {}
+          f:app.kubernetes.io/name: {}
+          f:app.kubernetes.io/part-of: {}
+    manager: argocd-2.2.15-linux-amd64
+    operation: Update
+    time: "2022-10-25T10:11:01Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:data:
+        f:scopes: {}
+    manager: kubectl-edit
+    operation: Update
+    time: "2022-11-09T10:48:40Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:data:
+        f:policy.csv: {}
+      f:metadata:
+        f:annotations:
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+    time: "2022-11-09T10:54:50Z"
+  name: argocd-rbac-cm
+  namespace: argocd-2-4
+  resourceVersion: "300951456"
+  selfLink: /api/v1/namespaces/argocd-2-4/configmaps/argocd-rbac-cm
+  uid: 1971b6bd-56ab-45d9-a4cb-5af7d46a8a2b

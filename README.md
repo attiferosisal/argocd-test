@@ -48,6 +48,10 @@ Reference
 
     argocd repo add https://github.com/attiferosisal/argocd-test-private.git --username ... --password ...
 
+## helm upgrade
+
+    helm upgrade release-2-4 bitnami/argo-cd -f values.yaml
+
 Export
 ------
 

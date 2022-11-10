@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-2-4-sisal
+  namespace: argocd-2-4
+  annotations:
+    forecastle.stakater.com/appName: ArgoCD-24
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/icon: https://cncf-branding.netlify.app/img/projects/argo/stacked/color/argo-stacked-color.png
+spec:
+  rules:
+  - host: argocd-automation-platform-preprod.sisal.it
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: release-2-4-argo-cd-server
+            port:
+              number: 80

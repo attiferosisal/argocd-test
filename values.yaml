@@ -13,13 +13,10 @@ redisWait:
   enabled: ture
 
 server:
-  replicaCount: 2
-  #livenessProbe:
-  #  enabled: true
-  #readinessProbe:
-  #  enabled: true
-  #metrics:
-  #  enabled: true
+  replicaCount: 1
+  insecure: true # important because otherwise argocd make a redirect
+  url: https://argocd-automation-platform-preprod.sisal.it
+
 
 repoServer:
   replicaCount: 2
@@ -36,6 +33,10 @@ dex:
   #  enabled: true
   serviceAccount:
     name: argocd-dex-server
+    create: false
+
+rbac:
+  create: false
 
 
   

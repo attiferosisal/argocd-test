@@ -1,0 +1,99 @@
+apiVersion: v1
+data:
+  application.instanceLabelKey: argocd.argoproj.io/instance
+  dex.config: ""
+  kustomize.path.v3.6.1: /custom-tools/kustomize_3_6_1
+  oidc.config: |
+    name: dex
+    issuer: https://dex-automation-platform-preprod.sisal.it/
+    clientID: argocd-auth-client
+    clientSecret: DAMp36KBwlOqc9Rdf7785sXhQ6pu84nW
+    # Optional set of OIDC scopes to request. If omitted, defaults to: ["openid", "profile", "email", "groups"]
+  repositories: |
+    - url: git@gitlab-automation-platform-preprod.sisal.it:kubernetes/area-riservata-italia/app.git
+      # the insecure parameters is because you can avoid to maintain the known_host configmap that
+      # must be synced otherwise with the exact status of gitlab instance
+      insecure: true
+      insecureIgnoreHostKey: true
+      sshPrivateKeySecret:
+        name: ssh-argocd-pvt
+        key: sshPrivateKey
+
+    - url: git@gitlab-automation-platform-preprod.sisal.it:kubernetes/area-riservata-italia/infra.git
+      # the insecure parameters is because you can avoid to maintain the known_host configmap that
+      # must be synced otherwise with the exact status of gitlab instance
+      insecure: true
+      insecureIgnoreHostKey: true
+      sshPrivateKeySecret:
+        name: ssh-argocd-pvt
+        key: sshPrivateKey
+  statusbadge.enabled: "true"
+  url: https://argocd-automation-platform-preprod.sisal.it
+  users.anonymous.enabled: "false"
+  users.session.duration: 24h
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"application.instanceLabelKey":"argocd.argoproj.io/instance","dex.config":"connectors:\n  # OIDC\n  - type: oidc\n    id: oidc\n    name: OIDC\n    config:\n      issuer: https://dex-automation-platform-preprod.sisal.it/\n      clientID: argocd-auth-client\n      clientSecret: DAMp36KBwlOqc9Rdf7785sXhQ6pu84nW\n","kustomize.path.v3.6.1":"/custom-tools/kustomize_3_6_1","oidc.config":"name: dex\nissuer: https://dex-automation-platform-preprod.sisal.it/\nclientID: argocd-auth-client\nclientSecret: DAMp36KBwlOqc9Rdf7785sXhQ6pu84nW\n# Optional set of OIDC scopes to request. If omitted, defaults to: [\"openid\", \"profile\", \"email\", \"groups\"]\n","repositories":"- url: git@gitlab-automation-platform-preprod.sisal.it:kubernetes/area-riservata-italia/app.git\n  # the insecure parameters is because you can avoid to maintain the known_host configmap that\n  # must be synced otherwise with the exact status of gitlab instance\n  insecure: true\n  insecureIgnoreHostKey: true\n  sshPrivateKeySecret:\n    name: ssh-argocd-pvt\n    key: sshPrivateKey\n\n- url: git@gitlab-automation-platform-preprod.sisal.it:kubernetes/area-riservata-italia/infra.git\n  # the insecure parameters is because you can avoid to maintain the known_host configmap that\n  # must be synced otherwise with the exact status of gitlab instance\n  insecure: true\n  insecureIgnoreHostKey: true\n  sshPrivateKeySecret:\n    name: ssh-argocd-pvt\n    key: sshPrivateKey\n","statusbadge.enabled":"true","url":"https://argocd-automation-platform-preprod.sisal.it","users.anonymous.enabled":"false","users.session.duration":"24h"},"kind":"ConfigMap","metadata":{"annotations":{"meta.helm.sh/release-name":"release-2-4","meta.helm.sh/release-namespace":"argocd-2-4"},"creationTimestamp":"2022-10-25T08:35:13Z","labels":{"app.kubernetes.io/instance":"release-2-4","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"argo-cd","app.kubernetes.io/part-of":"argocd","helm.sh/chart":"argo-cd-4.3.1"},"managedFields":[{"apiVersion":"v1","fieldsType":"FieldsV1","fieldsV1":{"f:data":{"f:kustomize.path.v3.6.1":{},"f:oidc.config":{},"f:repositories":{},"f:statusbadge.enabled":{},"f:users.anonymous.enabled":{},"f:users.session.duration":{}}},"manager":"argocd-2.2.15-linux-amd64","operation":"Update","time":"2022-10-25T10:11:01Z"},{"apiVersion":"v1","fieldsType":"FieldsV1","fieldsV1":{"f:data":{".":{},"f:application.instanceLabelKey":{},"f:dex.config":{}},"f:metadata":{"f:annotations":{".":{},"f:meta.helm.sh/release-name":{},"f:meta.helm.sh/release-namespace":{}},"f:labels":{".":{},"f:app.kubernetes.io/instance":{},"f:app.kubernetes.io/managed-by":{},"f:app.kubernetes.io/name":{},"f:app.kubernetes.io/part-of":{},"f:helm.sh/chart":{}}}},"manager":"helm","operation":"Update","time":"2022-11-09T09:24:20Z"},{"apiVersion":"v1","fieldsType":"FieldsV1","fieldsV1":{"f:data":{"f:url":{}},"f:metadata":{"f:annotations":{"f:kubectl.kubernetes.io/last-applied-configuration":{}}}},"manager":"kubectl-client-side-apply","operation":"Update","time":"2022-11-09T10:21:09Z"}],"name":"argocd-cm","namespace":"argocd-2-4","resourceVersion":"300939104","selfLink":"/api/v1/namespaces/argocd-2-4/configmaps/argocd-cm","uid":"0959ab82-20ce-4f8d-b129-bc9b87dd9199"}}
+    meta.helm.sh/release-name: release-2-4
+    meta.helm.sh/release-namespace: argocd-2-4
+  creationTimestamp: "2022-10-25T08:35:13Z"
+  labels:
+    app.kubernetes.io/instance: release-2-4
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: argo-cd
+    app.kubernetes.io/part-of: argocd
+    helm.sh/chart: argo-cd-4.3.1
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:data:
+        f:kustomize.path.v3.6.1: {}
+        f:oidc.config: {}
+        f:repositories: {}
+        f:statusbadge.enabled: {}
+        f:users.anonymous.enabled: {}
+        f:users.session.duration: {}
+    manager: argocd-2.2.15-linux-amd64
+    operation: Update
+    time: "2022-10-25T10:11:01Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:data:
+        .: {}
+        f:application.instanceLabelKey: {}
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:meta.helm.sh/release-name: {}
+          f:meta.helm.sh/release-namespace: {}
+        f:labels:
+          .: {}
+          f:app.kubernetes.io/instance: {}
+          f:app.kubernetes.io/managed-by: {}
+          f:app.kubernetes.io/name: {}
+          f:app.kubernetes.io/part-of: {}
+          f:helm.sh/chart: {}
+    manager: helm
+    operation: Update
+    time: "2022-11-09T09:24:20Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:data:
+        f:dex.config: {}
+        f:url: {}
+      f:metadata:
+        f:annotations:
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+    time: "2022-11-09T10:26:50Z"
+  name: argocd-cm
+  namespace: argocd-2-4
+  resourceVersion: "300941159"
+  selfLink: /api/v1/namespaces/argocd-2-4/configmaps/argocd-cm
+  uid: 0959ab82-20ce-4f8d-b129-bc9b87dd9199
