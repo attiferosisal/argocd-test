@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "helmstreet.fullname" . }}
-  namespace: {{ .Valuses.namespacesOverride | <some default name> }}
+  namespace: {{ .Valuses.namespacesOverride | include "helmstreet.serviceAccountName" . }}
   labels:
     {{- include "helmstreet.labels" . | nindent 4 }}
 spec:
