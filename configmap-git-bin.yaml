@@ -1,0 +1,32 @@
+apiVersion: v1
+data:
+  git: |
+    #!/bin/sh
+
+    #Point 5 of "ArgoCD git-crypt configuration" procedure
+
+    $(dirname $0)/git.bin "$@"
+    ec=$?
+    [ "$1" = fetch ] && [ -d .git-crypt ] || exit $ec
+    GNUPGHOME=/app/config/gpg/keys /custom-tools/git-crypt unlock 2>/dev/null
+    exit $ec
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"git":"#!/bin/sh\n\n#Point 5 of \"ArgoCD git-crypt configuration\" procedure\n\n$(dirname $0)/git.bin \"$@\"\nec=$?\n[ \"$1\" = fetch ] \u0026\u0026 [ -d .git-crypt ] || exit $ec\nGNUPGHOME=/app/config/gpg/keys /custom-tools/git-crypt unlock 2\u003e/dev/null\nexit $ec\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"git-bin","namespace":"argocd"}}
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:data:
+        .: {}
+        f:git: {}
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+  name: git-bin
+  namespace: argocd-2-4

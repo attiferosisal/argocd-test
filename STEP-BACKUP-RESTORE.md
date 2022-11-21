@@ -2,21 +2,30 @@ Requiremet
 ----------
 
 - helm client
-- argocd client
+- argocd client 2.4
 - kubectl
 - kubeconfig for referenced cluster
 
 Steps
 -----
 
-### Connect to source ArgoCD
+### Connect to ArgoCD - first solution ArcoCD API
 
-- kubectl port-forward --namespace argocd svc/argocd-server 8080:443
-- argocd-2.2.15-linux-amd64 login localhost:8080 --insecure --plaintext
+- echo "Password: $(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)"
+- kubectl port-forward --namespace argocd svc/argocd-server 8080:80
+- argocd login localhost:8080 --insecure --plaintext
+
+### Connect to ArgoCD - second solution ArgoCD throw kubecontext
+
+- argocd login --core true --kube-context argocd
 
 ### Export ArgoCD config
 
-- argocd-2.2.15-linux-amd64 admin export > backup_25102022.yaml
+- argocd admin export > backup_17112022.yaml
+
+### Patch backup
+
+To patch the backup use bash scritp replace.sh
 
 ### Install bitnami argocd repo
 
@@ -26,7 +35,7 @@ Steps
 
 - kubectl create namespace argocd-2-4
 - Change namespace to argocd-2-4
-- helm-3.10.1-linux-amd64 install release-2-4 bitnami/argo-cd -f valuesfile.yaml
+- helm-3.10.1-linux-amd64 install release-2-4 bitnami/argo-cd --version 4.3.0 -f valuesfile.yaml
 
 #### System Out
 
@@ -63,8 +72,8 @@ Steps
 ### Connect to destination ArgoCD
 
 - kubectl port-forward --namespace argocd svc/argocd-server 8080:443
-- argocd-2.2.15-linux-amd64 login localhost:8080 --insecure --plaintext
-- argocd-2.2.15-linux-amd64 admin import - < backup.yaml
+- argocd login localhost:8080 --insecure --plaintext
+- argocd admin import - < backup.yaml
 
 ### Insert url in argocd-cm if not inserted throw helm
 

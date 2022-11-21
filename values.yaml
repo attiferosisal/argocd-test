@@ -1,5 +1,5 @@
 image:
-  tag: 2.4.11
+  tag: 2.4.11-debian-11-r5
 
 #controller: 
 #  metrics:
@@ -9,15 +9,11 @@ redis:
   #enabled: ture
   architecture: replication
 
-redisWait:
-  enabled: ture
-
 server:
-  replicaCount: 1
+  replicaCount: 2
   insecure: true # important because otherwise argocd make a redirect
   url: https://argocd-automation-platform-preprod.sisal.it
-
-
+  
 repoServer:
   replicaCount: 2
   #livenessProbe:
@@ -28,15 +24,7 @@ repoServer:
   #  enabled: true
 
 dex:
-  enabled: true
+  enabled: false
   #metrics:
   #  enabled: true
-  serviceAccount:
-    name: argocd-dex-server
-    create: false
-
-rbac:
-  create: false
-
-
   

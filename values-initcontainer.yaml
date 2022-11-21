@@ -1,0 +1,64 @@
+image:
+  tag: 2.4.11-debian-11-r5
+  
+redis:
+  architecture: replication
+
+server:
+  replicaCount: 2
+  insecure: true # important because otherwise argocd make a redirect
+  url: https://argocd-automation-platform-preprod.sisal.it
+  
+repoServer:
+  extraVolumeMounts:
+  - name: custom-tools
+    mountPath: /custom-tools
+  - name: git-bin
+    mountPath: /git-bin
+  - name: custom-bin-dir
+    mountPath: /custom
+  extraVolumes:
+  - name: custom-tools
+    emptyDir: {}
+  - name: custom-bin-dir
+    emptyDir: {}        
+  - configMap:
+      defaultMode: 511
+      name: git-bin
+    name: git-bin
+  initContainers: 
+  - name: download-tools
+    image: alpine:3.13.5
+    command: [ "/bin/sh", "-xc" ]
+    args: [ "apk add --no-cache bash curl ; wget -qO /tmp/install_kustomize.sh https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh;
+      chmod +x /tmp/install_kustomize.sh; /tmp/install_kustomize.sh 3.6.1 /custom-tools;
+      mv /custom-tools/kustomize /custom-tools/kustomize_3_6_1" ]
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /custom-tools
+      name: custom-tools
+  - name: download-gitcrypt
+    image: ubuntu:20.04
+    command: [ "/bin/sh", "-xc" ]
+    args: [ "apt update; apt install -y git-crypt; cp /usr/bin/git-crypt /custom-tools/git-crypt" ]
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /custom-tools
+      name: custom-tools
+  - name: new-git-bin
+    command: [ "/bin/sh", "-xc" ]
+    args: [ "cp /git-bin/git /custom/git; chmod +x /custom/git; cp /usr/bin/git /custom/git.bin" ]
+    image: quay.io/argoproj/argocd:v2.4.11
+    imagePullPolicy: IfNotPresent
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /git-bin
+      name: git-bin
+    - mountPath: /custom
+      name: custom-bin-dir
+dex:
+  enabled: false

@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: argocd-2-4-sisal
-  namespace: argocd-2-4
+  namespace: argocd-2-4-11
   annotations:
     forecastle.stakater.com/appName: ArgoCD-24
     forecastle.stakater.com/expose: "true"
