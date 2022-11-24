@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Secret
+metadata:  
+  name: ocicli-config
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {}
+stringData:
+  config: |
+    [DEFAULT] 
+    user=ocid1.user.oc1..aaaaaaaaipyy6kwyojm3ugrbeeumuugohzkekihhhgleamn2n7pywwhxbr6a 
+    fingerprint=43:38:59:ad:83:30:76:02:05:21:9e:a0:10:ed:b3:f0
+    tenancy=ocid1.tenancy.oc1..aaaaaaaaiatm45o7xte5z2p33qtz4kxyzb77d4ycm6gildeytj7thwt3zvza 
+    region=us-ashburn-1 
+    key_file=/.oci/oci_api_key.pem
+  oci_api_key.pem: |
+    -----BEGIN PRIVATE KEY-----
+    MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDfKT7tBgX7YOfq
+    ZUO59tf9GTvNkJKTPiq3GoWLWM9nvhWmJ9eVVt9PNJpv/4n3JxhwFc3yLMCueul9
+    G5quTVl1WkZq2ftJUzVda3Dbb/ou5YJ6CP2uPJ9mwB/pjtNDSQKJ9UxjAJcH3CmJ
+    TUj+3PTC6RJ2UWx6AYf3JEuGIM9dy9c8r9vG5D7wPMJBhBNAVeNzfCf7HFJv73Vg
+    MF5nczyPGgsUhGUkeQJtP3i9DEaJInHebOHGEDshyYkwEg6QjvRfxE/Pi/wQa+I6
+    EHaX8dpy8brIYihDW5iDlQWxZHl5xUY0LruOQavTVw4CQs7iZKFnvMHdbf/H2I6V
+    7kfryKXHAgMBAAECggEAGdU5+hEo7x0cK6eWS/g1r5BUumqidRYMts6EqAlbVQyN
+    kALrs1dvmUkjGZTwwSIO86aqhP7GPUxwK/HemY/Nq8aMAUGDk8zkkBBoa5aOVRBv
+    ZrYUu6872pah+xT0AsV4XET/lzRRx3CmhETkjtBAKzH016p8TrFPrn3OmlPA/X/s
+    a7XgQ/GgS3zI3l8bXgacltWD7XGH+JM7HWXGy52pupGBUFHkGL0LVQlCUPUiNVIJ
+    M7oB1PRjv1GH2+VYdYUfxm55uN43tFL0P/advyljlTY5najTXb3DHV7QLyLjA1sb
+    ZIija44iOSXIyjxeCvxaM0XQH5OVf0flsgV8ifl5uQKBgQD0tet7aFnvh+GFlOw5
+    XcVwsdzF5KmJdudSMKugGXVjS85fHNWzIl28/TMNDl6Axh5k0puNxryJUnDL+FYv
+    rAc78mvB027L270dgfxjV0pC6QYwHWdxUIglsiRmF6B/TWqJwmZSIDp/NL5iGEph
+    o84Sikw6+9Q1IbOqIVaYWAH7rwKBgQDpdNJy1VtqJWNxEta5q/eIY18kcEKEVWZL
+    SUTb89hy0x9Et2BCh7HiyLD6nYE1L7+EDYxnWdaQf1jEUsXdJH1IlIxUcH/nhP0J
+    FmXY2VNTFdjAgrUqxeh+Kya0fW9XhKz6paWFndMl9mGrsaVoHs3+UVVZdyGGY57/
+    FRLVRVIFaQKBgQC1B0d2+dFec6UQTwUZwxbmsY1jEC+jM8UYdkzgmTTQCipXDlvA
+    szGpN55mkDS1Cts9NthAX77lz4kGO2Z2ycpoPIQe1Sznvlz+0URGsTKMoRokyfvW
+    Rf8R8+EdbWkcA8dGtfs/0fu0Uu5sXw/Xf3hZGtod4GIyFAZ3W0ZWWPTOnQKBgQCD
+    sPOZ9YL4sJiUy2S3HiunEy8zVeQf1DC9HVqrnLUnqLKFx8+UGAmffUhgRwMA5qtp
+    KV9fWY0wu7VuIacd5RyLGcjDRSbRifJW8vyGw6k+QB+iENlzhGpu6ZaO0AdD3kLZ
+    rSFe6zWVv5M/EBnXTzEyWd0Ed7BAp+ejytZx2gW3qQKBgE0v8kkgaHE+TdDuRKsT
+    d4ZDkbqDLVSv0938liOJUCzNW9KdZ0K88FYs8IQSNMqnOasr74AUqt1wtVEAYTgi
+    wlb1HGK21DR/JkWYcOkFMmoerqNfUVZcyoShhjeXhYJROlb8JMfzmD24heUjAsDp
+    in+2BbGPfEi3p86yUgI+ciQS
+    -----END PRIVATE KEY-----
+type: Opaque

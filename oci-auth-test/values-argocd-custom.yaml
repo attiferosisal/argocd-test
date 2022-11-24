@@ -1,0 +1,58 @@
+image:
+  registry: iad.ocir.io
+  repository: sisalspa/argo-cd-custom
+  tag: 2.4.11-debian-11-r5
+
+redis:
+  architecture: standalone
+
+controller:
+  logLevel: trace
+  extraEnvVars: 
+  - name: OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING
+    value: "True"
+  extraVolumeMounts:
+  - name: ocicli-config
+    mountPath: /.oci
+    readOnly: true
+  extraVolumes:
+  - secret:
+      defaultMode: 0600
+      secretName: ocicli-config
+    name: ocicli-config  
+
+server:
+  logLevel: trace
+  replicaCount: 1
+  extraEnvVars: 
+  - name: OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING
+    value: "True"
+  extraVolumeMounts:
+  - name: ocicli-config
+    mountPath: /.oci
+    readOnly: true
+  extraVolumes:
+  - secret:
+      defaultMode: 0600
+      secretName: ocicli-config
+    name: ocicli-config  
+  
+repoServer:
+  logLevel: trace
+  replicaCount: 1
+  extraEnvVars: 
+  - name: OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING
+    value: "True"
+  extraVolumeMounts:
+  - name: ocicli-config
+    mountPath: /.oci
+    readOnly: true
+  extraVolumes:
+  - secret:
+      defaultMode: 0600
+      secretName: ocicli-config
+    name: ocicli-config   
+  
+dex:
+  enabled: false
+  
